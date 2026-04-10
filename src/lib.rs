@@ -50,6 +50,17 @@ use bytemuck::*;
 #[cfg(feature = "serde")]
 use serde_core::{ser::SerializeTuple, Deserialize, Serialize};
 
+pub mod bytemuck {
+  //! Re-export of the `bytemuck` crate for casting between SIMD types.
+  //!
+  //! The SIMD types implement the [`bytemuck::Pod`] trait, which means that it
+  //! is possible to do bitwise conversions between SIMD types of the same size
+  //! with the [`bytemuck::cast()`] function and friends.
+  //!
+  //! This does typically not have any runtime overhead in optimized builds.
+  pub use ::bytemuck::*;
+}
+
 #[macro_use]
 mod macros;
 
